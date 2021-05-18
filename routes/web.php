@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ContactsController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,6 +14,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ContactsController::class, 'index'])->name('index');
+
+Route::post('/add', [ContactsController::class, 'add'])->name('add');
+Route::get('/delete/{id}', [ContactsController::class, 'delete'])->name('delete');
+
+Route::post('/{id}/addNote', [ContactsController::class, 'addNote'])->name('addNote');
+Route::get('/{id}/deleteNote/{noteId}', [ContactsController::class, 'deleteNote'])->name('deleteNote');
